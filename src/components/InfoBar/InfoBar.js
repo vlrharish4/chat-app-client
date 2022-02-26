@@ -1,5 +1,5 @@
 import classes from "./InfoBar.module.css";
-
+import { Link } from "react-router-dom";
 import closeIcon from "../../icons/closeIcon.png";
 import onlineIcon from "../../icons/onlineIcon.png";
 
@@ -11,9 +11,9 @@ const InfoBar = ({ room }) => {
         <h3>{room}</h3>
       </div>
       <div className={classes.rightInnerContainer}>
-        <a href="/">
+        <Link to="/">
           <img src={closeIcon} alt="close" />
-        </a>
+        </Link>
       </div>
     </div>
   );

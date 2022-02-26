@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import classes from "./Chat.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
 import SideBar from "../SideBar/SideBar";
 import { ENDPOINT } from "../../constants";
+import { authActions } from "../../store";
 
 let socket;
 
@@ -15,6 +16,7 @@ const Chat = () => {
   const [roomData, setRoomData] = useState({});
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -35,15 +37,16 @@ const Chat = () => {
       console.log("disconnect");
       socket.emit(
         "removeUser",
-        { name: auth.name, roomID: auth.room.id },
+        { userName: auth.name, roomID: auth.room.id },
         (roomDetails) => {
           console.log(`You left the room ${roomDetails.id}!`);
         }
       );
+      dispatch(authActions.reset());
       socket.disconnect();
       socket.off();
     };
-  }, [auth.room.id, auth.name]);
+  }, [auth.room.id, auth.name, dispatch]);
 
   // Use effect to listen to messages from server
   useEffect(() => {
