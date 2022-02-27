@@ -5,7 +5,7 @@ const SideBar = ({ users }) => {
     <div className={classes.container}>
       <ul>
         {users.map((user) => {
-          return <li key={user.id}>{user.name}</li>;
+          return <li key={user.name}>{user.name}</li>;
         })}
       </ul>
     </div>

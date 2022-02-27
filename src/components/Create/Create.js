@@ -47,6 +47,7 @@ const Create = () => {
       });
 
       const room = await response.json();
+      console.log(room);
       dispatch(
         authActions.setAuthentication({ isAuthenticated: true, room, name })
       );

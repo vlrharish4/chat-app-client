@@ -55,7 +55,7 @@ const Join = () => {
         dispatch(
           authActions.setAuthentication({
             isAuthenticated: true,
-            roomObject,
+            room: roomObject,
             name,
           })
         );
